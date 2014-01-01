@@ -1,0 +1,23 @@
+{
+  "name": "dropline",
+  "version": "0.0.0",
+  "description": "People let message for other people to read",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --harmony index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "koa": "0.2.*",
+    "html-entities": "~1.0.10"
+  },
+  "keywords": [
+    "message",
+    "instant"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "~1.0.1"
+  }
+}
