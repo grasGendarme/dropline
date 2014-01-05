@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "koa": "0.2.*",
-    "html-entities": "~1.0.10"
+    "underscore": "~1.5.2"
   },
   "keywords": [
     "message",

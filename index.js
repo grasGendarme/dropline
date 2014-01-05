@@ -1,14 +1,13 @@
 var koa = require('koa');
 var app = koa();
 
+var messages = require('./lib/messages.js');
+var newContent = require('./routes/new.js')
+
+var _ = require('underscore');
 var fs = require('fs');
-var beginHTML = fs.readFileSync('views/begin.html');
-var endHTML = fs.readFileSync('views/end.html');
+var mainPageTemplate = fs.readFileSync('templates/index._', 'utf8');
 
-var encode = new (require('html-entities').AllHtmlEntities)().encode;
-
-const maxMessages = 10;
-var messages = ['Hey', 'This is a new instance!'];
 
 function *responseTime(next){
   var start = new Date;
@@ -23,22 +22,7 @@ app.use(function *contentLength(next){
   this.set('Content-Length', Buffer.byteLength(this.body));
 });
 
-
-app.use(function *newContentHandler(next) {
-	if ('/new' == this.path) {
-		if (this.query && this.query.content) {
-		  messages.unshift(encode(this.query.content));
-		  messages.length = maxMessages <= messages.length ? maxMessages:messages.length;
-		  this.status = 200;
-		} else {
-		  this.body('Invalid request')
-		  this.status = 400;
-		}
-		this.redirect('/');
-		return;
-	}
-	yield next;
-});
+app.use(newContent);
 
 // Show the main page
 app.use(function *mainPage(next){
@@ -48,13 +32,16 @@ app.use(function *mainPage(next){
   }
   this.set('Content-Type', 'text/html');
   this.status = 200;
-  
-  body = beginHTML;
-  for (var i = 0; i < messages.length; i++) {
-    body += '<br>' + messages[i];		  
+  this.body = _.template(mainPageTemplate, {'messages': messages.latests});
+});
+
+app.use(function*API(next) {
+  if ('/API' !== this.url) {
+    yield next;
+    return;
   }
-  body += endHTML;
-  this.body = body;
+  this.set('Content-Type', 'application/json');
+  this.body = JSON.stringify(messages.latests, null, 2);
 });
 
 app.use(function *notFoundHandler() {
