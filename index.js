@@ -9,7 +9,13 @@ var newContent = require('./routes/new.js')
 var _ = require('underscore');
 var fs = require('fs');
 var mainPageTemplate = fs.readFileSync('templates/index._', 'utf8');
+var html;
+function renderTemplate() {
+  html = _.template(mainPageTemplate, {'messages': messages.latests});
+}
 
+messages.onUpdate(renderTemplate);
+renderTemplate();
 
 function *responseTime(next){
   var start = new Date;
@@ -34,10 +40,10 @@ app.use(function *mainPage(next){
   }
   this.set('Content-Type', 'text/html');
   this.status = 200;
-  this.body = _.template(mainPageTemplate, {'messages': messages.latests});
+  this.body = html;
 });
 
-app.use(function*API(next) {
+app.use(function *API(next) {
   if ('/API' !== this.url) {
     yield next;
     return;
