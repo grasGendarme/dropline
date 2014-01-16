@@ -3,6 +3,8 @@
 var koa = require('koa');
 var app = koa();
 
+var moment = require('moment')
+
 var messages = require('./lib/messages.js');
 var newContent = require('./routes/new.js')
 
@@ -11,7 +13,13 @@ var fs = require('fs');
 var mainPageTemplate = fs.readFileSync('templates/index._', 'utf8');
 var html;
 function renderTemplate() {
-  html = _.template(mainPageTemplate, {'messages': messages.latests});
+  function formatDate(msg) {
+    return {
+      message: msg.message,
+      date: moment(msg.date).fromNow()
+    };
+  }
+  html = _.template(mainPageTemplate, {'messages': _.map(messages.latests, formatDate)});
 }
 
 messages.onUpdate(renderTemplate);

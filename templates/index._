@@ -5,12 +5,17 @@
 	<title>Drop line.</title>
 </head>
 <body>
-	<% _.each(messages, function(message) { %> <li class="message"><%=message%></li><% }); %>
+	<h1>Just let a message here</h1>
+	<h3>Max 160 char</h3>
+	<% _.each(messages, function(message) { %> 
+		<li class="message"><%=message.message%> — <%=message.date%></li>
+	<% });%>
 
 	<p>Add your message: </p>
 	<form action="/new" method="GET">
 	<input type="text" name="content" value="...">
 	<input type="submit" value="Envoyer!">
+	<h6>anonymous.</h6>
 </form>
 </body>
 </html>
