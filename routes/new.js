@@ -12,7 +12,9 @@ module.exports = function *newContentHandler(next) {
         var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
         this.query.content = this.query.content.replace(exp,"<a href='$1' rel=\"nofollow\">$1</a>"); 
 		    messages.push(this.query.content, new Date());
-		    this.status = 200;
+		    this.status = 303;
+        this.set('Location', '/');
+        return;
       } else {
         this.body = 'Message too large';
         this.status = 400;
@@ -22,8 +24,7 @@ module.exports = function *newContentHandler(next) {
 		  this.body = 'Invalid request';
 		  this.status = 400;
 		}
-		this.redirect('/');
-		return;
+    return;
 	}
 	yield next;
 };
