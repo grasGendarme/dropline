@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<meta charset=utf-8 />
 	<title>Drop line.</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Just let a message here</h1>
-	<h3>Max 160 char</h3>
-	<% _.each(messages, function(message) { %> 
-		<li class="message"><%=message.message%> — <%=message.date%></li>
-	<% });%>
-
-	<p>Add your message: </p>
-	<form action="/new" method="GET">
-	<input type="text" name="content" value="...">
-	<input type="submit" value="Envoyer!">
-	<h6>anonymous.</h6>
+	<div class=text-center>
+		<h1>Just let a message here</h1>
+		<h4>160 char of freedom</h4>
+		
+		<div class="container">
+			<% _.each(messages, function(message) { %> 
+				<li class="message"><%=message.message%> — <%=message.date%></li>
+			<% });%>
+		</div>
+		
+		<div class="container">
+			<p>Add your message: </p>
+			<form action="/new" method="GET">
+			<input type="text" name="content" value="...">
+			<input type="submit" class="btn btn-default" value="Submit!">
+		</div>
+		
+		<h5>It's anonymous.</h5>
+	</div>
+    <script src="js/jquery-2.0.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </form>
 </body>
 </html>

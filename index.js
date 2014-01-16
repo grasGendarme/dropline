@@ -1,5 +1,6 @@
 'use strict';
 
+var serve = require('koa-static');
 var koa = require('koa');
 var app = koa();
 
@@ -31,6 +32,8 @@ function *responseTime(next){
   var ms = new Date - start;
   this.set('X-Response-Time', ms + 'ms');
 }
+
+app.use(serve(__dirname + '/assets'));
 
 app.use(function *contentLength(next){
   yield next;
