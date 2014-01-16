@@ -10,7 +10,7 @@ module.exports = function *newContentHandler(next) {
         this.query.content = _.escape(this.query.content);
         // regex magic to parse links posted
         var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-        this.query.content = this.query.content.replace(exp,"<a href='$1'>$1</a>"); 
+        this.query.content = this.query.content.replace(exp,"<a href='$1' rel=\"nofollow\">$1</a>"); 
 		    messages.push(this.query.content, new Date());
 		    this.status = 200;
       } else {
