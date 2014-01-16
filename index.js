@@ -58,7 +58,7 @@ app.use(function *mainPage(next){
 });
 
 app.use(function *API(next) {
-  if ('/API' !== this.url) {
+  if ('/api' !== this.url.toLowerCase()) {
     yield next;
     return;
   }
