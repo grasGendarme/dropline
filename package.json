@@ -23,6 +23,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "nodemon": "~1.0.1"
+    "nodemon": "~1.0.1",
+    "koa-compress": "~1.0.1"
   }
 }

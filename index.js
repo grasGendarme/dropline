@@ -1,6 +1,7 @@
 'use strict';
 
 var serve = require('koa-static');
+var compress = require('koa-compress')
 var koa = require('koa');
 var app = koa();
 
@@ -32,6 +33,8 @@ function *responseTime(next){
   var ms = new Date - start;
   this.set('X-Response-Time', ms + 'ms');
 }
+
+app.use(compress());
 
 app.use(serve(__dirname + '/assets'));
 
