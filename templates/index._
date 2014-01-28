@@ -17,17 +17,20 @@
 			<% });%>
 		</div>
 		
-		<div class="container">
+		<div class="container" id="messageform">
 			<p>Add your message: </p>
-			<form action="/new" method="GET">
-			<input type="text" name="content" value="...">
-			<input type="submit" class="btn btn-default" value="Submit!">
+			<form action="/new" method="GET" class="messageform">
+			<input type="text" name="content" id="message_content_input" placeholder="...">
+			<label class="error" for="content" id="too_long_message_error">Message length is 160 characters max</label>
+			<label class="error" for="content" id="no_message_error">You must input a message.</label>
+			<label class="error" for="content" id="submit_error">Error while submitting</label>
+			<input type="submit" class="btn btn-default" id="submit_button" value="Submit!">
+			</form>
 		</div>
-		
 		<h5>It's anonymous.</h5>
 	</div>
     <script src="js/jquery-2.0.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-</form>
+	<script src="js/main.js"></script>
 </body>
 </html>
