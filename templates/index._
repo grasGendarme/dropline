@@ -21,10 +21,12 @@
 			<p>Add your message: </p>
 			<form action="/new" method="GET" class="messageform">
 			<input type="text" name="content" id="message_content_input" placeholder="...">
-			<label class="error" for="content" id="too_long_message_error">Message length is 160 characters max</label>
-			<label class="error" for="content" id="no_message_error">You must input a message.</label>
-			<label class="error" for="content" id="submit_error">Error while submitting</label>
 			<input type="submit" class="btn btn-default" id="submit_button" value="Submit!">
+			<div>
+				<label class="error" for="content" id="too_long_message_error">Message length is 160 characters max</label>
+				<label class="error" for="content" id="no_message_error">You must input a message.</label>
+				<label class="error" for="content" id="submit_error">Error while submitting</label>
+			</div>
 			</form>
 		</div>
 		<h5>It's anonymous.</h5>
